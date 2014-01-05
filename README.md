@@ -18,7 +18,7 @@ Instead of:
 Install using [composer](http://getcomposer.org/):
 
 ```shell
-composer global require masnun/symfony-cli:*
+composer global require masnun/symfony-cli:dev-master
 ```
 
 ## Bugs/Issues? 
