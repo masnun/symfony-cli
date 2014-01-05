@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+// Code modified from - https://github.com/johnnyfreeman/artisan-cli
+
+// Directory Separator
+define('DS', DIRECTORY_SEPARATOR);
+
+
+function findAndRunSFConsole($dir = '.')
+{
+
+    // If we have app/console, just require it to execute
+    if (file_exists($file = $dir . DS . 'app/console')) {
+        require_once $file;
+
+    } else {
+        // We have reached root - abort!
+        if ($dir === DS) {
+            echo PHP_EOL . "\033[41mERROR:\033[0m Unable to find the \033[1;35m\"app/console\"\033[0m file." . PHP_EOL . PHP_EOL;
+            exit();
+        }
+
+        // recurse for parent
+
+        if ($dir = realpath($dir . DS . '..')) {
+            return findAndRunSFConsole($dir);
+        }
+    }
+}
+
+// start looking
+findAndRunSFConsole();

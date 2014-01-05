@@ -1,0 +1,26 @@
+{
+  "name": "masnun/symfony-cli",
+  "type": "library",
+  "description": "A global command line tool for Symfony2",
+  "keywords": ["symfony","symfony2", "global", "cli"],
+  "homepage": "https://github.com/masnun/symfony-cli",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Abu Ashraf Masnun",
+      "email": "masnun@transcendio.net",
+      "homepage": "http://masnun.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/masnun/symfony-cli.git"
+    }
+  ],
+  "bin": ["bin/symfony"]
+}
