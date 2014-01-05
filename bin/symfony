@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-// Code modified from - https://github.com/johnnyfreeman/artisan-cli
+// Code improved from - https://github.com/johnnyfreeman/artisan-cli
 
 // Directory Separator
 define('DS', DIRECTORY_SEPARATOR);
@@ -12,7 +12,17 @@ function findAndRunSFConsole($dir = '.')
 
     // If we have app/console, just require it to execute
     if (file_exists($file = $dir . DS . 'app/console')) {
-        require_once $file;
+
+        // Skip app/console shebang line
+        $fileContents = file($file);
+        if (strpos($fileContents[0], "bin")) {
+            array_shift($fileContents);
+            file_put_contents("app/symfony-cli", join(PHP_EOL, $fileContents));
+            require_once 'app/symfony-cli';
+        } else {
+            // No shebang line, just require
+            require_once $file;
+        }
 
     } else {
         // We have reached root - abort!
@@ -22,12 +32,14 @@ function findAndRunSFConsole($dir = '.')
         }
 
         // recurse for parent
-
         if ($dir = realpath($dir . DS . '..')) {
             return findAndRunSFConsole($dir);
         }
     }
 }
 
-// start looking
+// Run
 findAndRunSFConsole();
+
+
+
