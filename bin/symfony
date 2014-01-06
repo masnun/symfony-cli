@@ -17,8 +17,8 @@ function findAndRunSFConsole($dir = '.')
         $fileContents = file($file);
         if (strpos($fileContents[0], "bin")) {
             array_shift($fileContents);
-            file_put_contents("app/symfony-cli", join(PHP_EOL, $fileContents));
-            require_once 'app/symfony-cli';
+            file_put_contents($dir . DS . "app/symfony-cli", join(PHP_EOL, $fileContents));
+            require_once $dir . DS . 'app/symfony-cli';
         } else {
             // No shebang line, just require
             require_once $file;
